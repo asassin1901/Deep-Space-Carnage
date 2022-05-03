@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
     private bool Ded = false;
     //If this is false we're not dashing
     public bool dash;
-
+    // Self explanatory. Delay between dashes.
     public float dashDelay;
 
     private Animator myAnimator;

@@ -12,9 +12,6 @@ public class Enemy_Behavior : MonoBehaviour
     public float damage;
     //Can player take damage
     private bool health;
-
-    public object playerScript;
-
     private Rigidbody2D rb;
 
     public void Start()
