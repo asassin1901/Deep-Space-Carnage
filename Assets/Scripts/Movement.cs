@@ -16,11 +16,19 @@ public class Movement : MonoBehaviour
     public float dashRange;
     //How long are the iFrames gonna last
     public float invFrames;
+    public float moveX;
+    public float moveY;
 
     //Quality of life     To be Deleted
     private bool Ded = false;
     //If this is false we're not dashing
     public bool dash;
+
+    public float dashDelay;
+
+    private Animator myAnimator;
+
+    private float delTime;
     //Are we taking damage
     public bool HP = true;
     //how much health we have
@@ -28,6 +36,11 @@ public class Movement : MonoBehaviour
 
     private Vector2 moveDirection;
     private Vector2 mousePos;
+
+    private void Start()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
 
     //Update goes every frame
     void Update()
@@ -47,9 +60,20 @@ public class Movement : MonoBehaviour
 
     void ProcessInputs()
     {
-        float moveX = Input.GetAxisRaw("Vertical");
-        float moveY = Input.GetAxisRaw("Horizontal");
 
+            moveY = Input.GetAxisRaw("Horizontal");
+            moveX = Input.GetAxisRaw("Vertical");
+
+        bool failSafe = true;
+        if (Mathf.Abs(moveX) == 1f || Mathf.Abs(moveY) == 1f && failSafe == true)
+        {
+            myAnimator.SetBool("isMoving", true);
+            failSafe = false;
+        } else
+        {
+            myAnimator.SetBool("isMoving", false);
+            failSafe = true;
+        }
         //Where are we moving
         moveDirection = new Vector2(moveY, moveX).normalized;
 
@@ -57,7 +81,7 @@ public class Movement : MonoBehaviour
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         //We dashin here
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && delTime <= Time.time)
         {
             dash = true;
         }
@@ -97,6 +121,9 @@ public class Movement : MonoBehaviour
 
             //Coroutine to actually time the iFrames
             StartCoroutine(iFrames());
+
+            //We use it earlier
+            delTime = Time.time + dashDelay;
 
             //Enabling dash again since we can only dash when this changes to true
             dash = false;
