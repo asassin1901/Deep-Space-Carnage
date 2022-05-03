@@ -15,6 +15,7 @@ public class Enemy_Behavior : MonoBehaviour
 
     Path path;
     int currentWaypoint = 0;
+    //Why the hell is this needed? I mean it just turns true -> false and the other way around and does nothing.
     bool reachedEndPath = false;
     //Yeah I don't completely understand A* yet. I assume this seeks out a path on the predetermined grid.
     Seeker seeker;
@@ -29,8 +30,6 @@ public class Enemy_Behavior : MonoBehaviour
     //Our rigidbody
     private Rigidbody2D rb;
 
-    Vector2 check;
-
     //Methods
     public void Start()
     {
@@ -38,7 +37,7 @@ public class Enemy_Behavior : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
 
-        InvokeRepeating("UpdatePath", 0f, .25f);
+        InvokeRepeating("UpdatePath", 0f, .5f);
     }
 
     void UpdatePath()
@@ -75,14 +74,16 @@ public class Enemy_Behavior : MonoBehaviour
                 reachedEndPath = false;
             }
 
-            Vector2 direction = (Vector2)path.vectorPath[currentWaypoint] - rb.position;
-            direction.Normalize();
-            Vector2 force = direction * speed * Time.deltaTime;
+             Vector2 direction = (Vector2)path.vectorPath[currentWaypoint] - rb.position;
+             direction.Normalize();
+             Debug.Log(direction);
+             Vector2 force = direction * speed * Time.deltaTime;
+
+            //transform.Translate(-((Vector2)path.vectorPath[currentWaypoint] - rb.position) * Time.deltaTime);
 
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
-            //rb.AddForce(force);
-            transform.Translate(-(direction * speed * Time.deltaTime));
+            rb.AddForce(force);
 
             if (distance < nextWaypointDistance) 
             {
