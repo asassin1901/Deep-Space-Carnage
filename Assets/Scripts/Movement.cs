@@ -39,7 +39,8 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
-        myAnimator = GetComponent<Animator>();
+        myAnimator = GetComponentInChildren<Animator>();
+        rb = GetComponentInChildren<Rigidbody2D>();
     }
 
     //Update goes every frame
@@ -60,11 +61,14 @@ public class Movement : MonoBehaviour
 
     void ProcessInputs()
     {
+        //Stuff for the upcoming Animator stuff
+        moveY = Input.GetAxisRaw("Horizontal");
+        moveX = Input.GetAxisRaw("Vertical");
 
-            moveY = Input.GetAxisRaw("Horizontal");
-            moveX = Input.GetAxisRaw("Vertical");
-
+        //I didn't have much time and I linked animator stuff in a wrong way at first. Long story short I'm not sure it's needed but I don't have time and the balls to fuck around.
         bool failSafe = true;
+
+        //if because the movement needs animation and I couldn't reasonably fit animator stuff somewhere else
         if (Mathf.Abs(moveX) == 1f || Mathf.Abs(moveY) == 1f && failSafe == true)
         {
             myAnimator.SetBool("isMoving", true);
@@ -74,6 +78,7 @@ public class Movement : MonoBehaviour
             myAnimator.SetBool("isMoving", false);
             failSafe = true;
         }
+
         //Where are we moving
         moveDirection = new Vector2(moveY, moveX).normalized;
 
@@ -89,11 +94,13 @@ public class Movement : MonoBehaviour
 
     void Move()
     {
+        //I mean yeah we move the thing that this script is linked to. Preferably a player character.
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 
     void Rotate()
     {
+        //We rotate based on camera or rather mouse orientation with camera... Yes that means I couldn't put camera in players children. Yes it makes everything confusing.
         Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
@@ -103,8 +110,10 @@ public class Movement : MonoBehaviour
     {
         if (dash)
         {
-            // bool for turning on and off our dmg counting
+            // bool for turning on and off our dmg counting. Not sure if I'm using it to be honest. TD?
             HP = false;
+
+            myAnimator.SetTrigger("isDashing");
 
             //Where we're ending up
             Vector2 dashPosition = rb.position + moveDirection * dashRange *Time.deltaTime;
@@ -127,6 +136,9 @@ public class Movement : MonoBehaviour
 
             //Enabling dash again since we can only dash when this changes to true
             dash = false;
+        } else
+        {
+            return;
         }
     }
 
@@ -139,7 +151,7 @@ public class Movement : MonoBehaviour
 
     void life()
     {
-        if(health == 0)
+        if(health <= 0)
         {
             Ded = true;
         }
