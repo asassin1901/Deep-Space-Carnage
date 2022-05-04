@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class Spawner_PH : MonoBehaviour
 {
-    public GameObject enemy;
-    public float time;
-    public float timeMultiplier;
-    public float limit;
+    public GameObject entityToSpawn;
 
-    private void Start()
+    public SpawnManagerScriptableObject spawnManagerValues;
+
+    int instanceNumber;
+
+    void Start()
     {
-        time = 0f;
+        SpawnEntities();    
     }
 
-    // Update is called once per frame
-    void Update()
+    void SpawnEntities()
     {
-        time = time + 1 * timeMultiplier;
+        int currentSpawnPointIndex = 0;
 
-        if(time >= limit)
+        for (int i = 0; i < spawnManagerValues.numberOfPrefabsToCreate; i++)
         {
-            GameObject newEnemy = Instantiate(enemy);
-            time = 0;
+            // Creates an instance of the prefab at the current spawn point.
+            GameObject currentEntity = Instantiate(entityToSpawn, spawnManagerValues.spawnPoints[currentSpawnPointIndex], Quaternion.identity);
+
+            // Sets the name of the instantiated entity to be the string defined in the ScriptableObject and then appends it with a unique number. 
+            currentEntity.name = spawnManagerValues.prefabName + instanceNumber;
+
+            // Moves to the next spawn point index. If it goes out of range, it wraps back to the start.
+            currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnManagerValues.spawnPoints.Length;
+
+            instanceNumber++;
         }
     }
 }
