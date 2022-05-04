@@ -76,7 +76,6 @@ public class Enemy_Behavior : MonoBehaviour
 
              Vector2 direction = (Vector2)path.vectorPath[currentWaypoint] - rb.position;
              direction.Normalize();
-             Debug.Log(direction);
              Vector2 force = direction * speed * Time.deltaTime;
 
             //transform.Translate(-((Vector2)path.vectorPath[currentWaypoint] - rb.position) * Time.deltaTime);
