@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class Spawner_PH : MonoBehaviour
 {
+    private float delay = .5f;
+    private float afterDelay;
     public GameObject entityToSpawn;
 
     public SpawnManagerScriptableObject spawnManagerValues;
 
-    int instanceNumber;
-
-    void Start()
+    public int instanceNumber = 0;
+    
+    public void Update()
     {
-        SpawnEntities();    
+        if(Time.time >= afterDelay && instanceNumber <= spawnManagerValues.numberOfPrefabsToCreate)
+        {
+            SpawnEntities();
+            Debug.Log("Spawn");
+        }
     }
 
     void SpawnEntities()
     {
         int currentSpawnPointIndex = 0;
 
-        for (int i = 0; i < spawnManagerValues.numberOfPrefabsToCreate; i++)
+        for (int i = 0; i < 2; i++)
         {
             // Creates an instance of the prefab at the current spawn point.
             GameObject currentEntity = Instantiate(entityToSpawn, spawnManagerValues.spawnPoints[currentSpawnPointIndex], Quaternion.identity);
@@ -32,5 +38,6 @@ public class Spawner_PH : MonoBehaviour
 
             instanceNumber++;
         }
+        afterDelay = Time.time + delay;
     }
 }

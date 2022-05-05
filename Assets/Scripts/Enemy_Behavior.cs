@@ -8,6 +8,10 @@ public class Enemy_Behavior : MonoBehaviour
     //Variables
     public Transform target;
 
+    public GameObject player;
+
+    private Animator myAnimator;
+
     Vector3 rotation = new Vector3( 0f, 0f, -180f);
 
     public float speed;
@@ -31,11 +35,17 @@ public class Enemy_Behavior : MonoBehaviour
     private Rigidbody2D rb;
 
     //Methods
+
     public void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        target = player.transform;
+
         //since Rb is private because leaving it on public might cause issues with readability we get our rigid body through code
         rb = this.GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
+        myAnimator = GetComponentInChildren<Animator>();
+
 
         InvokeRepeating("UpdatePath", 0f, .5f);
     }
@@ -77,8 +87,6 @@ public class Enemy_Behavior : MonoBehaviour
              Vector2 direction = (Vector2)path.vectorPath[currentWaypoint] - rb.position;
              direction.Normalize();
              Vector2 force = direction * speed * Time.deltaTime;
-
-            //transform.Translate(-((Vector2)path.vectorPath[currentWaypoint] - rb.position) * Time.deltaTime);
 
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
@@ -122,6 +130,7 @@ public class Enemy_Behavior : MonoBehaviour
         //we check if the player can take damage
         if (collision.gameObject.CompareTag("Player"))
         {
+            myAnimator.SetTrigger("Chomp");
             health = collision.gameObject.GetComponent<Movement>().HP;
             Debug.Log("-1 Health");
         }
