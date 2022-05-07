@@ -11,7 +11,6 @@ public class Spawner_PH : MonoBehaviour
 
 
     public bool survival;
-    private bool whyAmIHere = false;
 
     private float survivalCountdown;
     private float delay = .5f;
