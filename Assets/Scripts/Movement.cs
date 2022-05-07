@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
 
     public Rigidbody2D rb;
     public Camera cam;
+    private GameObject player;
 
     //How fast we're moving
     public float moveSpeed;
@@ -40,7 +41,8 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         myAnimator = GetComponentInChildren<Animator>();
-        rb = GetComponentInChildren<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        player = this.gameObject;
     }
 
     //Update goes every frame
@@ -96,6 +98,12 @@ public class Movement : MonoBehaviour
     {
         //I mean yeah we move the thing that this script is linked to. Preferably a player character.
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+
+        //haphazardly made camera code so stuff doesn't break
+        cam.transform.position = (new Vector3 (player.transform.position.x, player.transform.position.y, -10f));
+
+        //camera for challange rooms? With a bit of tweaking this could be rather nice.
+        //cam.transform.position = (new Vector3 (player.transform.position.x, player.transform.position.y, -10f) * moveSpeed * Time.deltaTime);
     }
 
     void Rotate()

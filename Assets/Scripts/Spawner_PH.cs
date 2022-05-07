@@ -11,13 +11,29 @@ public class Spawner_PH : MonoBehaviour
     public SpawnManagerScriptableObject spawnManagerValues;
 
     public int instanceNumber = 0;
-    
-    public void Update()
+
+    public bool survival = false;
+
+    private float survivalCountdown;
+
+    public float survivalTime;
+
+    void Start()
     {
-        if(Time.time >= afterDelay && instanceNumber <= spawnManagerValues.numberOfPrefabsToCreate)
+        survivalCountdown = Time.time + survivalTime;
+    }
+    
+    void Update()
+    {
+        if(survival)
         {
-            SpawnEntities();
-            Debug.Log("Spawn");
+            if(Time.time >= afterDelay)
+                SpawnEntities();
+        } 
+        else
+        {         
+            if(Time.time >= afterDelay && instanceNumber <= 10)
+                SpawnEntities();
         }
     }
 
@@ -25,7 +41,7 @@ public class Spawner_PH : MonoBehaviour
     {
         int currentSpawnPointIndex = 0;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < spawnManagerValues.numberOfPrefabsToCreate; i++)
         {
             // Creates an instance of the prefab at the current spawn point.
             GameObject currentEntity = Instantiate(entityToSpawn, spawnManagerValues.spawnPoints[currentSpawnPointIndex], Quaternion.identity);

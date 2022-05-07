@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManagerScriptableObject
   prefabName: Joe
-  numberOfPrefabsToCreate: 10
+  numberOfPrefabsToCreate: 4
   spawnPoints:
   - {x: -3, y: 3, z: 0}
   - {x: 3, y: 0, z: 0}
