@@ -9,4 +9,7 @@ public class SpawnManagerScriptableObject : ScriptableObject
 
     public int numberOfPrefabsToCreate;
     public Vector3[] spawnPoints;
+
+    public GameObject[] spawner;
+    public Transform[] arTransform;
 }
