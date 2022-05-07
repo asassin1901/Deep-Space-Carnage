@@ -7,10 +7,11 @@ public class Button : MonoBehaviour
 {
     public Slider slider;
 
+    public bool survivalDone = true;
     public bool playerDistance = false;
 
     public GameObject spawner;
-    public GameObject door;
+    public Image bar;
     public Collider2D trigger;
 
     private float Timer;
@@ -19,7 +20,7 @@ public class Button : MonoBehaviour
 
     void Start()
     {
-        slider.value = 1;
+        slider.value = 0f;
         longTime = 0f;
     }
 
@@ -45,21 +46,25 @@ public class Button : MonoBehaviour
         {
             spawner.SetActive(true);
 
+            playerDistance = false;
+
             trigger.enabled = false;
 
             longTime = Time.time + waitTime;
         }
         if (longTime >= Time.time)
         {
+            survivalDone = true;
             Timer = longTime - Time.time;
             float test = 1 - (Timer/waitTime);
-            Debug.Log(test);
 
                 if(spawner.activeInHierarchy == true)
             slider.value = test;
         } else 
         {
+            bar.color = new Color(0,200,28);
             spawner.SetActive(false);
+            survivalDone = false;
         }
     }
 }

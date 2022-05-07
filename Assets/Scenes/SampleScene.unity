@@ -185,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &143686014
 GameObject:
@@ -218,9 +218,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityToSpawn: {fileID: 0}
   spawnManagerValues: {fileID: 0}
-  instanceNumber: 0
   survival: 0
   survivalTime: 0
+  instanceNumber: 0
 --- !u!4 &143686016
 Transform:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 425457143}
   m_Layer: 10
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,7 +550,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.23, y: 1.03, z: 0}
   m_LocalScale: {x: 0.09981295, y: 0.087936155, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1907354060}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -563,13 +564,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 425457139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c37182b3ee325e34ca335b508acff25a, type: 3}
+  m_Script: {fileID: 11500000, guid: d4da7f3a558fd874f89e62edc9bc5260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1628980963}
+  survivalDone: 1
   playerDistance: 0
   spawner: {fileID: 362745877}
-  door: {fileID: 0}
+  bar: {fileID: 1359639106}
+  trigger: {fileID: 425457144}
   waitTime: 12
 --- !u!61 &425457144
 BoxCollider2D:
@@ -736,9 +739,9 @@ MonoBehaviour:
   entityToSpawn: {fileID: 5705298358432585006, guid: 17d07d804c81a844c899bdc2e96e8723,
     type: 3}
   spawnManagerValues: {fileID: 11400000, guid: 1b2a4726050fd6e49bae813f74f969f2, type: 2}
-  instanceNumber: 0
   survival: 0
   survivalTime: 0
+  instanceNumber: 0
 --- !u!1 &972510965
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1426793039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,9 +985,9 @@ MonoBehaviour:
   entityToSpawn: {fileID: 5705298358432585006, guid: 17d07d804c81a844c899bdc2e96e8723,
     type: 3}
   spawnManagerValues: {fileID: 11400000, guid: 1b2a4726050fd6e49bae813f74f969f2, type: 2}
-  instanceNumber: 0
-  survival: 0
+  survival: 1
   survivalTime: 0
+  instanceNumber: 0
 --- !u!4 &1426793040
 Transform:
   m_ObjectHideFlags: 0
@@ -1082,7 +1085,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1628980961}
   - component: {fileID: 1628980963}
-  - component: {fileID: 1628980962}
   m_Layer: 5
   m_Name: ProgressBar
   m_TagString: Untagged
@@ -1109,20 +1111,8 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 52, y: 9}
+  m_SizeDelta: {x: 3.89, y: 0.818}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1628980962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628980960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f077c1ac9199e44d84ae62345405ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1628980963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,7 +1230,7 @@ Canvas:
   m_GameObject: {fileID: 1907354056}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1259,19 +1249,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907354056}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10.018741, y: 11.371886, z: 1}
   m_Children:
   - {fileID: 1628980961}
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 425457142}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.4, y: 14.5}
+  m_SizeDelta: {x: 4.93, y: 1.3}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1910043448
 GameObject:
   m_ObjectHideFlags: 0
