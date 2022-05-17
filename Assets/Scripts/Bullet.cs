@@ -59,6 +59,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Enemy_Behavior>().HP -= damage;
+            collision.gameObject.GetComponent<Enemy_Behavior>().HitIndicator();
             Debug.Log("Ouch");
         }
     }

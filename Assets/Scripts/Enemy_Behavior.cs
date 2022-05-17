@@ -33,6 +33,10 @@ public class Enemy_Behavior : MonoBehaviour
     private bool health;
     //Our rigidbody
     private Rigidbody2D rb;
+    //Why are we still here? Just to suffer? To apply knockback I need vector2. What do I need?
+    /*1. Position of PC
+    2. position of Enemy {Deprecated}
+    3. Color Change on hit*/
 
     //Methods
 
@@ -134,5 +138,22 @@ public class Enemy_Behavior : MonoBehaviour
             health = collision.gameObject.GetComponent<Movement>().HP;
             Debug.Log("-1 Health");
         }
+    }
+    public void HitIndicator()
+    {
+        StartCoroutine(HitCoroutine());  
+    }
+
+    public IEnumerator HitCoroutine()
+    {
+        float length = 0.3f;
+
+        //Nothing made me act like an old man with dementia more than finally understanding that "new Color" instead of Color was the issue.
+        SpriteRenderer spritey = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+        spritey.color = new Color(1f,0f,0f,0.8f);
+
+        yield return new WaitForSeconds(length);
+
+        spritey.color = Color.white;
     }
 }
