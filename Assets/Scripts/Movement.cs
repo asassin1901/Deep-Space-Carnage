@@ -38,6 +38,8 @@ public class Movement : MonoBehaviour
     private Vector2 moveDirection;
     private Vector2 mousePos;
 
+    public bool currentDoorKey = false;
+
     private void Start()
     {
         myAnimator = GetComponentInChildren<Animator>();
