@@ -5,9 +5,10 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     /*Things we need:
-    1. Boss has to have health
-    2. Boss has to have his attacks: slam with the circle of projectiles, breath?, and eeeee Singular projectiles per x time? 
-    3. Death State (Odpala się odpowiednia animacja wybuchy, wytryski, eksplozje)
+    1. Boss has to have health (Done?)/ I need to decide wether each part has health and fight gets harder with each part dead or whole boss = whole health
+    2. Boss has to have his attacks: slam with the circle of projectiles(DONE), breath?(reuse the logic behind slam with lower spread and more projectiles),
+        Swipe with the other hand?(anim/transform.translate/rb.AddRelativeForce(), RB2D with a collider!)
+    3. Death State (Odpala się odpowiednia animacja wybuchy, wytryski, eksplozje) (We'll get that one working later)
     4. Something to switch between attacks (random ammount of time x-y after that next attack comes.)
     
     1. Yes I know trully a magnificent discovery
