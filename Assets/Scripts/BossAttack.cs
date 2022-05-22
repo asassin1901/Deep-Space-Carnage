@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BossAttack : MonoBehaviour
@@ -17,6 +19,11 @@ public class BossAttack : MonoBehaviour
         {
             originPoint[i] = this.transform.GetChild(i).transform.GetChild(0);
         }
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.J))
+            StartCoroutine(AttackLaser(6));
     }
 
     public void AttackLeft(int projCount)
@@ -53,19 +60,22 @@ public class BossAttack : MonoBehaviour
             thisProjectile.transform.Rotate(new Vector3(0 ,0 , (thisProjectile.transform.rotation.z + 15 * i)));
         }
     }
-
-    public void AttackLaser(int projCount)
+    public IEnumerator AttackLaser(int projCount)
     {
-        /*1. Line renderer has to be turned on and off
-        2. Figure out how to do a continuous raycast (Ideas: 1. Update 2. FixedUpdate 3. Some weird method or coroutine I don't know about 
-            4. Sacrifice an infant to machine god for purpose of learning tech wizardry.)
-        3. Figure out how to stop a continuous raycast just in case.
-        4. Profit?*/
+        /*1. Line renderer has to be turned on and off (IEnumerator coroutine)
+        2. Figure out how to do a continuous raycast (Update)
+        3. Remember to put a condition to turn it off.
+        4. Okay so. I need a point of origin and to designate a direction for raycast. I also need to figure out how to draw multiple lines.*/
         RaycastHit2D[] hitinfo = new RaycastHit2D[projCount];
         
+        lineRenderer.SetPosition(0, originPoint[2].position);
         for (int i = 0; i < projCount; i++)
         {
-            
+            //Okay this is cool. But: How the hell am I going to do the warning thingy? Ideas: 1. Prefab
+            //2. Another for loop before this one? and line renderer has lower alfa?(Is that even possible?)
+            hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.75f + 0.25f * (i), -0.2f));
+            lineRenderer.SetPosition(1, hitinfo[i].point);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }
