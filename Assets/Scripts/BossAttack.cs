@@ -57,9 +57,10 @@ public class BossAttack : MonoBehaviour
     public void AttackLaser(int projCount)
     {
         /*1. Line renderer has to be turned on and off
-        2. Figure out how to do a continuous raycast (Ideas: 1. Update 2. FixedUpdate 3. Some weird method or coroutine I don't know about 4. Sacrifice an infant or something idk.)
+        2. Figure out how to do a continuous raycast (Ideas: 1. Update 2. FixedUpdate 3. Some weird method or coroutine I don't know about 
+            4. Sacrifice an infant to machine god for purpose of learning tech wizardry.)
         3. Figure out how to stop a continuous raycast just in case.
-        4. Profit.*/
+        4. Profit?*/
         RaycastHit2D[] hitinfo = new RaycastHit2D[projCount];
         
         for (int i = 0; i < projCount; i++)
