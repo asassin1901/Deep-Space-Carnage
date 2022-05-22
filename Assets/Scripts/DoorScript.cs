@@ -6,10 +6,11 @@ public class DoorScript : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<Movement>().currentDoorKey == true)
-        {
-            other.gameObject.GetComponent<Movement>().currentDoorKey = false;
-            gameObject.SetActive(false);
-        }
+        if(other.CompareTag("Player"))
+            if (other.gameObject.GetComponent<Movement>().currentDoorKey == true)
+            {
+                other.gameObject.GetComponent<Movement>().currentDoorKey = false;
+                gameObject.SetActive(false);
+            }
     }
 }
