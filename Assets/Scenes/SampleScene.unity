@@ -2129,10 +2129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ec4723861e2d14c8d3cd7c607e502e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLhand: 0
-  healthRhand: 0
-  healthHead: 0
+  healthLhand: 1
+  healthRhand: 1
+  healthHead: 1
   betweenPatterns: 4
+  children: []
 --- !u!4 &1699564647
 Transform:
   m_ObjectHideFlags: 0
