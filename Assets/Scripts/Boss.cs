@@ -5,21 +5,75 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     /*Things we need:
-    1. Boss has to have health (Done?)/ I need to decide wether each part has health and fight gets harder with each part dead or whole boss = whole health
-    2. Boss has to have his attacks: slam with the circle of projectiles(DONE), breath?(reuse the logic behind slam with lower spread and more projectiles),
-        Swipe with the other hand?(anim/transform.translate/rb.AddRelativeForce(), RB2D with a collider!)
+    1. Each part of boss has to have health. This will be a problem. Maybe?
+    2. Boss attacks. We don't talk about this. Class = BossAttacks.
     3. Death State (Odpala się odpowiednia animacja wybuchy, wytryski, eksplozje) (We'll get that one working later)
     4. Something to switch between attacks (random ammount of time x-y after that next attack comes.)
     
-    1. Yes I know trully a magnificent discovery
-    2. When the method is called the right body part should head to the first point (x) and then to the second point (y) after wich we instantiate projectiles
-        often with a for loop. Probably
+    1. (Done)
+    2. Call animator trigger. Animation has a trigger that calls the attack method that instantiates projectiles / casts Raycasts.
     3. When the health runs out boss has to go into right animation sate and we'll play some particles or something like that
-    4. After x ammount of time where x will be randomly generated in between attacks with another method probably. We'll also choose wich atack will be executed
-        With RNG since we're planning like 3 attacks it's not enough to make patterns a good idea. (I think? What if we randomly choose a pattern of attacks?
-        with a cooldown period in wich PC will be able to dish out dmg easily without having to bullet hell the shit out of it?)*/
+    4. Boss has 3 atacks if I make him cast them at random with random intervals gameplay will get messy. (State Machine?)
+        Let's designate like 3 sets of coroutines / methods that will serve us as patterns and then we can choose a pattern > set time grace period in wich
+        PC can do whatever they want > another pattern*/
 
     //Things we need to define right now
-    public int health;//Without defining it to tweak easily during testing
+    public float healthLhand;
+    public float healthRhand;
+    public float healthHead;
+    public float betweenPatterns;
 
+    private Animator myAnimator;
+    // In case I need it later Depends on what anims I get
+    // private Animator lHandAnim;
+    // private Animator rHandAnim;
+    // private Animator HeadAnim;
+
+    private void Awake() {
+        myAnimator = this.GetComponent<Animator>();
+    }
+
+    private void Start() {
+        StartCoroutine(DownTime());
+    }
+
+    private IEnumerator DownTime()
+    {
+        int pattern = (int)Mathf.Round(Random.Range(0,1));
+        print("Random Chose Pattern:" + pattern);
+        yield return new WaitForSeconds(betweenPatterns);
+        
+        switch (pattern)
+        {
+            case 0:
+                StartCoroutine(LRL());
+                break;
+            
+            case 1:
+                StartCoroutine(LHL());
+                break;
+            
+            default:
+                StartCoroutine(DownTime());
+                break;
+        }
+    }
+
+    public IEnumerator LRL()
+    {
+        myAnimator.SetTrigger("LeftAttack");
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(0.8f);
+        myAnimator.SetTrigger("LeftAttack");
+        StartCoroutine(DownTime());
+    }
+
+    public IEnumerator LHL()
+    {
+        myAnimator.SetTrigger("LeftAttack");
+        myAnimator.SetTrigger("Laser");
+        yield return new WaitForSeconds(0.8f);
+        myAnimator.SetTrigger("LeftAttack");
+        StartCoroutine(DownTime());
+    }
 }
