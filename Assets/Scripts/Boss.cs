@@ -39,7 +39,7 @@ public class Boss : MonoBehaviour
 
     private IEnumerator DownTime()
     {
-        int pattern = (int)Mathf.Round(Random.Range(0,1));
+        int pattern = (int)Mathf.Round(Random.Range(0,2));
         print("Random Chose Pattern:" + pattern);
         yield return new WaitForSeconds(betweenPatterns);
         
@@ -62,8 +62,9 @@ public class Boss : MonoBehaviour
     public IEnumerator LRL()
     {
         myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("RightAttack");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("LeftAttack");
         StartCoroutine(DownTime());
     }
@@ -71,8 +72,9 @@ public class Boss : MonoBehaviour
     public IEnumerator LHL()
     {
         myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("Laser");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("LeftAttack");
         StartCoroutine(DownTime());
     }

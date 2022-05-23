@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
+    [SerializeField] LayerMask layerMask;
     public int projectileDamage;
     public float spread;
     private int originCount;
@@ -29,7 +30,6 @@ public class BossAttack : MonoBehaviour
     public void AttackLeft(int projCount)
     {
         //originPoint[0]
-        //unity animation > (Anim trigger calls this method) Instantiate projectiles > another anim to go back to pos0
         GameObject thisProjectile;
         for (int i = 0; i < projCount; i++)
         {
@@ -67,12 +67,14 @@ public class BossAttack : MonoBehaviour
         4. Okay so. I need a point of origin and to designate a direction for raycast. I also need to figure out how to draw multiple lines.*/
         RaycastHit2D[] hitinfo = new RaycastHit2D[projCount];
         
+        int a = layerMask;
+
         lineRenderer.SetPosition(0, originPoint[2].position);
         for (int i = 0; i < projCount; i++)
         {
             //Okay this is cool. But: How the hell am I going to do the warning thingy? Ideas: 1. Prefab
             //2. Another for loop before this one? and line renderer has lower alfa?(Is that even possible?)
-            hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.75f + 0.25f * (i), -0.2f));
+            hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.25f + 0.125f * (i), -0.3f), Mathf.Infinity, a);
             lineRenderer.SetPosition(1, hitinfo[i].point);
             yield return new WaitForSeconds(0.25f);
         }
