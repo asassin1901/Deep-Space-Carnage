@@ -40,10 +40,14 @@ public class Movement : MonoBehaviour
 
     public bool currentDoorKey = false;
 
-    private void Start()
-    {
+    private void Awake() {
+        cam = FindObjectOfType<Camera>();
         myAnimator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         player = this.gameObject;
     }
 

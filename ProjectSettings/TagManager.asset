@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Spawner
   - Button
+  - HandR
+  - HandL
+  - Head
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - For_A*
   - Enemy
   - Grenade
-  - 
+  - EnemyProjectile
   - 
   - 
   - 

@@ -29,7 +29,7 @@ public class BossAttack : MonoBehaviour
     public void AttackLeft(int projCount)
     {
         //originPoint[0]
-        //unity animation > Instantiate projectiles > another anim to go back to pos0
+        //unity animation > (Anim trigger calls this method) Instantiate projectiles > another anim to go back to pos0
         GameObject thisProjectile;
         for (int i = 0; i < projCount; i++)
         {
@@ -41,12 +41,11 @@ public class BossAttack : MonoBehaviour
     public void AttackRight(int projCount)
     {
         //originPoint[1]
-        //Same as left / pos1 > pos2 > enable trigger > swipe across room > dmg on trigger > disable trigger > pos0
         GameObject thisProjectile;
         for (int i = 0; i < projCount; i++)
         {
             thisProjectile = Instantiate(projectile, originPoint[1].position, Quaternion.identity);
-            thisProjectile.transform.Rotate(new Vector3(0 ,0 , (thisProjectile.transform.rotation.z + spread * i)));
+            thisProjectile.transform.Rotate(new Vector3(0 ,0 , (thisProjectile.transform.rotation.z + spread * i) + 90));
         }
     }
 

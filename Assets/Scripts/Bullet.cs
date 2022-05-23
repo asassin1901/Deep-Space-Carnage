@@ -56,12 +56,32 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<Enemy_Behavior>().HP -= damage;
-            collision.gameObject.GetComponent<Enemy_Behavior>().HitIndicator();
-            Debug.Log("Ouch");
-        }
+            switch (collision.gameObject.tag)
+            {
+                case "HandL":
+                    collision.gameObject.GetComponentInParent<Boss>().healthLhand -= damage;
+                    print("Left Hand");
+                    break;
+
+                case "HandR":
+                    collision.gameObject.GetComponentInParent<Boss>().healthRhand -= damage;
+                    print("Right Hand");
+                    break;
+
+                case "Head":
+                    collision.gameObject.GetComponentInParent<Boss>().healthHead -= damage;
+                    print("Head");
+                    break;
+
+                case "Enemy":
+                    collision.gameObject.GetComponent<Enemy_Behavior>().HP -= damage;
+                    collision.gameObject.GetComponent<Enemy_Behavior>().HitIndicator();
+                    break;
+
+                default:
+
+                    break;
+            }
     }
 
 }
