@@ -11,6 +11,7 @@ public class BossAttack : MonoBehaviour
     public Transform[] originPoint;
     public GameObject projectile;
     public LineRenderer lineRenderer;
+    public GameObject telegraph;
     
     private void Start() 
     {
@@ -66,17 +67,30 @@ public class BossAttack : MonoBehaviour
         3. Remember to put a condition to turn it off.
         4. Okay so. I need a point of origin and to designate a direction for raycast. I also need to figure out how to draw multiple lines.*/
         RaycastHit2D[] hitinfo = new RaycastHit2D[projCount];
+        Vector2[] middlePoint = new Vector2[projCount];
+        float[] distance = new float[projCount];
+        lineRenderer.enabled = true;
+        GameObject thisTelegraph;
         
         int a = layerMask;
+        
+        //Okay start another raycast find a vector 2 point in between .point and origin.
+        //Instantiate an object in therere. Fuck around with Vector2 rotation/direction.
+        for (int i = 0; i < projCount; i++)
+        {
+            hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.25f + 0.125f * (i), -0.3f), Mathf.Infinity, a);
+            middlePoint[i] = new Vector2((originPoint[2].position.x + hitinfo[i].point.x) / 2, (originPoint[2].position.y + hitinfo[i].point.y) / 2);
+            distance[i] = Vector2.Distance(originPoint[2].position, middlePoint[i]);
+            thisTelegraph = Instantiate(telegraph, new Vector3(middlePoint[i].x, middlePoint[i].y, 0f), Quaternion.identity);
+        }
 
         lineRenderer.SetPosition(0, originPoint[2].position);
         for (int i = 0; i < projCount; i++)
         {
-            //Okay this is cool. But: How the hell am I going to do the warning thingy? Ideas: 1. Prefab
-            //2. Another for loop before this one? and line renderer has lower alfa?(Is that even possible?)
             hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.25f + 0.125f * (i), -0.3f), Mathf.Infinity, a);
             lineRenderer.SetPosition(1, hitinfo[i].point);
             yield return new WaitForSeconds(0.25f);
         }
+            lineRenderer.enabled = false;
     }
 }
