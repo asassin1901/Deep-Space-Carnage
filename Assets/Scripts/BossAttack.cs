@@ -77,6 +77,8 @@ public class BossAttack : MonoBehaviour
         int a = layerMask;
         int b = layerMaskIP;
         lineRenderer.SetPosition(0, originPoint[2].position);
+
+        yield return new WaitForSeconds(0.25f);
         
         //Okay start another raycast find a vector 2 point in between .point and origin.
         //Instantiate an object in therere. Fuck around with Vector2 rotation/direction.
@@ -100,15 +102,16 @@ public class BossAttack : MonoBehaviour
             thisTelegraph[i].transform.localScale = new Vector3(0.5f, distance[i] + 2.1f, 1f);
             SpriteRenderer spritey = thisTelegraph[i].GetComponent<SpriteRenderer>();
             spritey.color = new Color(spritey.color.r, spritey.color.g, spritey.color.b, spritey.color.a / 2f);
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.5f);
+            spritey.enabled = false;
         }
 
-        yield return new WaitForSeconds(2f);
+        // yield return new WaitForSeconds(2f);
 
-        for (int i = 0; i < projCount; i++)
-        {
-            Destroy(thisTelegraph[i].gameObject);
-        }
+        // for (int i = 0; i < projCount; i++)
+        // {
+        //     Destroy(thisTelegraph[i].gameObject);
+        // }
 
         lineRenderer.enabled = true;
 
