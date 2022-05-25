@@ -102,15 +102,13 @@ public class BossAttack : MonoBehaviour
             thisTelegraph[i].transform.localScale = new Vector3(0.5f, distance[i] + 2.1f, 1f);
             SpriteRenderer spritey = thisTelegraph[i].GetComponent<SpriteRenderer>();
             spritey.color = new Color(spritey.color.r, spritey.color.g, spritey.color.b, spritey.color.a / 2f);
-            yield return new WaitForSeconds(0.5f);
-            spritey.enabled = false;
+            yield return new WaitForSeconds(0.75f);
+            Destroy(thisTelegraph[i].gameObject);
         }
 
-        // yield return new WaitForSeconds(2f);
 
         // for (int i = 0; i < projCount; i++)
         // {
-        //     Destroy(thisTelegraph[i].gameObject);
         // }
 
         lineRenderer.enabled = true;

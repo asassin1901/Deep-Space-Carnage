@@ -2217,7 +2217,7 @@ MonoBehaviour:
   healthLhand: 1
   healthRhand: 1
   healthHead: 1
-  betweenPatterns: 4
+  betweenPatterns: 10
   children: []
 --- !u!4 &1699564647
 Transform:
