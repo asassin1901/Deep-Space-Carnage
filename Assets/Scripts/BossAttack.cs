@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossAttack : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;
+    [SerializeField] LayerMask layerMaskIP; // The same but this one ignores player. We'll need that.
     public int projectileDamage;
     public float spread;
     private int originCount;
@@ -12,6 +13,7 @@ public class BossAttack : MonoBehaviour
     public GameObject projectile;
     public LineRenderer lineRenderer;
     public GameObject telegraph;
+    private Rigidbody2D rb;
     
     private void Start() 
     {
@@ -21,6 +23,7 @@ public class BossAttack : MonoBehaviour
         {
             originPoint[i] = this.transform.GetChild(i).transform.GetChild(0);
         }
+        lineRenderer.enabled = false;
     }
 
     private void Update() {
@@ -69,22 +72,46 @@ public class BossAttack : MonoBehaviour
         RaycastHit2D[] hitinfo = new RaycastHit2D[projCount];
         Vector2[] middlePoint = new Vector2[projCount];
         float[] distance = new float[projCount];
-        lineRenderer.enabled = true;
-        GameObject thisTelegraph;
+        GameObject[] thisTelegraph = new GameObject[projCount];
         
         int a = layerMask;
+        int b = layerMaskIP;
+        lineRenderer.SetPosition(0, originPoint[2].position);
         
         //Okay start another raycast find a vector 2 point in between .point and origin.
         //Instantiate an object in therere. Fuck around with Vector2 rotation/direction.
         for (int i = 0; i < projCount; i++)
         {
-            hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.25f + 0.125f * (i), -0.3f), Mathf.Infinity, a);
+            //We cast a raycast so we have info we need.
+            hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.25f + 0.125f * (i), -0.3f), Mathf.Infinity, b);
+            //We find out where is a middle point between origin and raycast hit
             middlePoint[i] = new Vector2((originPoint[2].position.x + hitinfo[i].point.x) / 2, (originPoint[2].position.y + hitinfo[i].point.y) / 2);
+            //We need that later for scaling things
             distance[i] = Vector2.Distance(originPoint[2].position, middlePoint[i]);
-            thisTelegraph = Instantiate(telegraph, new Vector3(middlePoint[i].x, middlePoint[i].y, 0f), Quaternion.identity);
+            //We spawn an object in the middle between origin and raycast hit
+            thisTelegraph[i] = Instantiate(telegraph, new Vector3(middlePoint[i].x, middlePoint[i].y, 0f), Quaternion.identity);
+
+            //We rotate said object so it covers the area we want it to.
+            Vector3 dir = originPoint[2].transform.position - thisTelegraph[i].transform.position;
+            Quaternion rot = Quaternion.LookRotation(Vector3.forward, dir);
+            thisTelegraph[i].transform.rotation = Quaternion.Lerp(thisTelegraph[i].transform.rotation, rot, 10f);
+
+            //We scale the sprite up so it covers the whole distance between origin point and wherever raycast hits
+            thisTelegraph[i].transform.localScale = new Vector3(0.5f, distance[i] + 2.1f, 1f);
+            SpriteRenderer spritey = thisTelegraph[i].GetComponent<SpriteRenderer>();
+            spritey.color = new Color(spritey.color.r, spritey.color.g, spritey.color.b, spritey.color.a / 2f);
+            yield return new WaitForSeconds(0.25f);
         }
 
-        lineRenderer.SetPosition(0, originPoint[2].position);
+        yield return new WaitForSeconds(2f);
+
+        for (int i = 0; i < projCount; i++)
+        {
+            Destroy(thisTelegraph[i].gameObject);
+        }
+
+        lineRenderer.enabled = true;
+
         for (int i = 0; i < projCount; i++)
         {
             hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.25f + 0.125f * (i), -0.3f), Mathf.Infinity, a);
