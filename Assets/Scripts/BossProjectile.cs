@@ -15,7 +15,7 @@ public class BossProjectile : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Movement>().health --;
+            other.gameObject.GetComponent<Movement>().Damage(1);
         }
     }
 }

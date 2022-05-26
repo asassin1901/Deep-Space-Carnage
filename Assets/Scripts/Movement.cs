@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    //This script is old and I don't have time to make it look and work well so now we both get to suffer
     //What we collide with while dashing
     [SerializeField] LayerMask dashInclude;
 
@@ -163,6 +164,18 @@ public class Movement : MonoBehaviour
         HP = true;
     }
 
+    public void Damage(int damage)
+    {
+        if(HP == true)
+        {
+            health -= damage;
+            print(health);
+            StartCoroutine(iFrames());
+            myAnimator.SetTrigger("Hit");
+        }
+    }
+
+    //I honestly have no idea what the hell is this supposed to be but I'm afraid of deleting it.
     void life()
     {
         if(health <= 0)

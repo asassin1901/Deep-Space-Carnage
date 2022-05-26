@@ -14,6 +14,8 @@ public class BossAttack : MonoBehaviour
     public LineRenderer lineRenderer;
     public GameObject telegraph;
     private Rigidbody2D rb;
+    //How much damage our laser attack deals
+    public int lDamage;
     
     private void Start() 
     {
@@ -106,17 +108,17 @@ public class BossAttack : MonoBehaviour
             Destroy(thisTelegraph[i].gameObject);
         }
 
-
-        // for (int i = 0; i < projCount; i++)
-        // {
-        // }
-
         lineRenderer.enabled = true;
 
         for (int i = 0; i < projCount; i++)
         {
             hitinfo[i] = Physics2D.Raycast(originPoint[2].position, new Vector2(-0.25f + 0.125f * (i), -0.3f), Mathf.Infinity, a);
             lineRenderer.SetPosition(1, hitinfo[i].point);
+            Movement health = hitinfo[i].transform.GetComponent<Movement>();
+            if (health != null)
+            {
+                health.Damage(lDamage);
+            }
             yield return new WaitForSeconds(0.25f);
         }
             lineRenderer.enabled = false;

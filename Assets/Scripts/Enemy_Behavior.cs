@@ -28,7 +28,7 @@ public class Enemy_Behavior : MonoBehaviour
     public float HP;
 
     //how much damage it deals
-    public float damage;
+    public int damage;
     //Can player take damage. I'm actually unsure if this works properly atm.
     private bool health;
     //Our rigidbody
@@ -135,7 +135,7 @@ public class Enemy_Behavior : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             myAnimator.SetTrigger("Chomp");
-            health = collision.gameObject.GetComponent<Movement>().HP;
+            collision.gameObject.GetComponent<Movement>().Damage(damage);
             Debug.Log("-1 Health");
         }
     }
