@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    //This script is old and I don't have time to make it look and work well so now we both get to suffer
+    //This script is old and I don't have time to make it look and work well (Or rather remake it because at least half of this should be rewriten) 
+    //so now we both get to suffer
     //What we collide with while dashing
     [SerializeField] LayerMask dashInclude;
 
