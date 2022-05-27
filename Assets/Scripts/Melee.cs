@@ -15,7 +15,7 @@ public class Melee : MonoBehaviour
     public LayerMask enemyLayers;
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && Time.time >= afterDelay)
+        if(Input.GetButton("Fire2") && Time.time >= afterDelay)
         {
             Swing();
         }

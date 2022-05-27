@@ -11,11 +11,11 @@ public class BossProjectile : MonoBehaviour
         GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.up * bulletSpeed * Time.deltaTime);
     }
     private void OnCollisionEnter2D(Collision2D other) {
-        Destroy(this);
+        Destroy(this.gameObject);
 
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Movement>().health --;
+            other.gameObject.GetComponent<Movement>().Damage(1);
         }
     }
 }

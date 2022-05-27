@@ -11,7 +11,7 @@ public class Boss : MonoBehaviour
     4. Something to switch between attacks (random ammount of time x-y after that next attack comes.)
     
     1. (Done)
-    2. Call animator trigger. Animation has a trigger that calls the attack method that instantiates projectiles / casts Raycasts.
+    2. Call animator trigger. Animation has a trigger that calls the attack method that instantiates projectiles / casts Raycasts.(Done)
     3. When the health runs out boss has to go into right animation sate and we'll play some particles or something like that
     4. Boss has 3 atacks if I make him cast them at random with random intervals gameplay will get messy. (State Machine?)
         Let's designate like 3 sets of coroutines / methods that will serve us as patterns and then we can choose a pattern > set time grace period in wich
@@ -22,6 +22,19 @@ public class Boss : MonoBehaviour
     public float healthRhand;
     public float healthHead;
     public float betweenPatterns;
+    private bool head = false;
+    private bool hand0 = false;
+    private bool hand1 = false;
+    public List<GameObject> children;
+
+    //DO NOT TOUCH UNTILL YOU KNOW WHAT IT'S USED FOR
+    //x: lower number of rng range INCLUSIVE
+    //y: higher number of rng range EXCLUSIVE (We're rouding it to the closes int so basic definition doesn't apply)
+    //Default values in case someone was "testing stuff" and forgott:
+    //x: 0
+    //y: 1
+    private float x = 0;
+    private float y = 1;
 
     private Animator myAnimator;
     // In case I need it later Depends on what anims I get
@@ -35,11 +48,62 @@ public class Boss : MonoBehaviour
 
     private void Start() {
         StartCoroutine(DownTime());
+        foreach (Transform child in this.gameObject.transform)
+        {
+            children.Add(child.gameObject);
+        }
+    }
+
+    private void Update() {
+        //0: LArm 1: RArm 2:Head
+        if(healthLhand <= 0 && hand0 == false)
+        {
+            hand0 = true;
+            Death(0);
+        }
+        if(healthRhand <= 0 && hand1 == false)
+        {
+            hand1 = true;
+            Death(1);
+        }
+        if(healthHead <= 0 && head == false)
+        {
+            head = true;
+            Death(2);
+        }
+        if(head == true && hand0 == true && hand1 == true)
+        {
+            StopAllCoroutines();
+        }
+    }
+    private void Death(int num){
+        //0: LArm 1: RArm 2:Head
+        switch (num)
+        {
+            case 0:
+                children[0].GetComponent<SpriteRenderer>().color = Color.gray;
+                children[0].GetComponent<BoxCollider2D>().enabled = false;
+                break;
+            
+            case 1:
+                children[1].GetComponent<SpriteRenderer>().color = Color.gray;
+                children[1].GetComponent<BoxCollider2D>().enabled = false;
+                break;
+
+            case 2:
+                children[2].GetComponent<SpriteRenderer>().color = Color.gray;
+                children[2].GetComponent<BoxCollider2D>().enabled = false;
+                break;
+            
+            default:
+            return;
+        }
     }
 
     private IEnumerator DownTime()
     {
-        int pattern = (int)Mathf.Round(Random.Range(0,1));
+        //We chose what gets into that switch down there. And there is literally no way this backfires in an annoying way.
+        int pattern = (int)Mathf.Round(Random.Range(x,y));
         print("Random Chose Pattern:" + pattern);
         yield return new WaitForSeconds(betweenPatterns);
         
@@ -58,12 +122,15 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
-
+    //L: Left Hand
+    //R: Right Hand
+    //H: Head
     public IEnumerator LRL()
     {
         myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("RightAttack");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("LeftAttack");
         StartCoroutine(DownTime());
     }
@@ -71,8 +138,9 @@ public class Boss : MonoBehaviour
     public IEnumerator LHL()
     {
         myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("Laser");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("LeftAttack");
         StartCoroutine(DownTime());
     }

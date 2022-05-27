@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KeysPrototype : MonoBehaviour
 {
-    string keyColor;
     /*To Do:
     If we have access to multiple:
     1. set up several bools.
