@@ -13,6 +13,10 @@ public class Shooting : MonoBehaviour
     public bool shotgun = false;
     public int bullets;
     public int spread;
+    public int maxMag;
+    public int mag;
+    public float reloadTime;
+    float reload = 0f;
 
     public float delay;
 
@@ -24,11 +28,6 @@ public class Shooting : MonoBehaviour
     private Vector2 pelletForce;
     private Animator myAnimator;
 
-
-    private void Start()
-    {
-        myAnimator = GetComponent<Animator>();
-    }
     private void Awake()
     {
         if (shotgun)
@@ -43,10 +42,15 @@ public class Shooting : MonoBehaviour
                 cp.Add(Quaternion.Euler(Vector2.zero));
             }
         }
-
+        mag = maxMag;
     }
 
-    //Check every frame if the player didn't press the thing and when he did do stuff
+    private void Start()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
+
+    //Check every frame if the player didn't press the thing and if he did do stuff
     void Update()
     {
         processInputs();
@@ -59,9 +63,25 @@ public class Shooting : MonoBehaviour
         {
             if (Time.time >= nextFireTime)
             {
-                Shoot();
+                Ammo();
                 nextFireTime = Time.time + delay;
+                bool test = reload == 0 || reload <= Time.time;
+                print (test);
             }
+        }
+    }
+
+    void Ammo()
+    {
+        if(mag > 0 && (reload == 0 || reload <= Time.time))
+        {
+            Shoot();
+            mag --;
+            print (mag);
+        } else
+        {
+            reload = Time.time + reloadTime;
+            mag = maxMag;
         }
     }
 
