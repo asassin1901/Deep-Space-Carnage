@@ -102,6 +102,9 @@ MonoBehaviour:
   shotgun: 0
   bullets: 0
   spread: 0
+  maxMag: 0
+  mag: 0
+  reloadTime: 0
   delay: 0.3
   bulletForce: 20
 --- !u!95 &1055670835780656273
@@ -315,6 +318,9 @@ MonoBehaviour:
   shotgun: 0
   bullets: 0
   spread: 0
+  maxMag: 0
+  mag: 0
+  reloadTime: 0
   delay: 1.5
   bulletForce: 15
 --- !u!95 &1055670836838865429
@@ -468,6 +474,9 @@ MonoBehaviour:
   shotgun: 1
   bullets: 7
   spread: 15
+  maxMag: 0
+  mag: 0
+  reloadTime: 0
   delay: 1
   bulletForce: 200
 --- !u!95 &1055670836943421368
@@ -572,7 +581,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.96, y: 0.96}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
