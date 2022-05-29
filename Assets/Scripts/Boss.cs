@@ -32,7 +32,7 @@ public class Boss : MonoBehaviour
     //y: higher number of rng range EXCLUSIVE (We're rouding it to the closes int so basic definition doesn't apply)
     //Default values in case someone was "testing stuff" and forgott:
     //x: 0
-    //y: 1
+    //y: 2
     private float x = 0;
     private float y = 2;
 
