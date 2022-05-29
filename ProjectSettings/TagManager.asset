@@ -10,6 +10,7 @@ TagManager:
   - HandR
   - HandL
   - Head
+  - Ammo
   layers:
   - Default
   - TransparentFX

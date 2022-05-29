@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
@@ -16,7 +17,7 @@ public class Shooting : MonoBehaviour
     public int maxMag;
     public int mag;
     public float reloadTime;
-    float reload = 0f;
+    private bool isReloading = false;
 
     public float delay;
 
@@ -27,6 +28,11 @@ public class Shooting : MonoBehaviour
 
     private Vector2 pelletForce;
     private Animator myAnimator;
+
+    public Text ammoDisplay;
+    public string maxAmmo;
+    private string ammo;
+    private string wholeAmmo;
 
     private void Awake()
     {
@@ -43,6 +49,10 @@ public class Shooting : MonoBehaviour
             }
         }
         mag = maxMag;
+        maxAmmo = maxMag.ToString();
+        ammo = maxAmmo;
+        wholeAmmo = ammo + " / " + maxAmmo;
+        ammoDisplay.text = wholeAmmo;
     }
 
     private void Start()
@@ -53,6 +63,13 @@ public class Shooting : MonoBehaviour
     //Check every frame if the player didn't press the thing and if he did do stuff
     void Update()
     {
+        if(isReloading)
+            return;
+        if(mag<=0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
         processInputs();
     }
 
@@ -63,31 +80,27 @@ public class Shooting : MonoBehaviour
         {
             if (Time.time >= nextFireTime)
             {
-                Ammo();
+                Shoot();
                 nextFireTime = Time.time + delay;
-                bool test = reload == 0 || reload <= Time.time;
-                print (test);
             }
+            wholeAmmo = ammo + " / " + maxAmmo;
+            ammoDisplay.text = wholeAmmo;
         }
     }
 
-    void Ammo()
+    IEnumerator Reload()
     {
-        if(mag > 0 && (reload == 0 || reload <= Time.time))
-        {
-            Shoot();
-            mag --;
-            print (mag);
-        } else
-        {
-            reload = Time.time + reloadTime;
-            mag = maxMag;
-        }
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+        mag = maxMag;
+        isReloading = false;
     }
 
     //Create a bullet and Yeet it with bulletForce amount of force
     void Shoot()
     {
+        mag --;
+        ammo = mag.ToString();
         if (shotgun)
         {
             //This makes bullet ammount of pellets spread out in 2 dimensions with a bit of a random spread defined within "spread"

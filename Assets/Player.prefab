@@ -107,6 +107,8 @@ MonoBehaviour:
   reloadTime: 0.4
   delay: 0.3
   bulletForce: 20
+  ammoDisplay: {fileID: 0}
+  maxAmmo: 
 --- !u!95 &1055670835780656273
 Animator:
   serializedVersion: 3
@@ -323,6 +325,8 @@ MonoBehaviour:
   reloadTime: 1.5
   delay: 1.5
   bulletForce: 15
+  ammoDisplay: {fileID: 0}
+  maxAmmo: 
 --- !u!95 &1055670836838865429
 Animator:
   serializedVersion: 3
@@ -479,6 +483,8 @@ MonoBehaviour:
   reloadTime: 0.75
   delay: 1
   bulletForce: 200
+  ammoDisplay: {fileID: 0}
+  maxAmmo: 
 --- !u!95 &1055670836943421368
 Animator:
   serializedVersion: 3
@@ -606,7 +612,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1055670836468128995
 MonoBehaviour:
@@ -625,6 +631,7 @@ MonoBehaviour:
     m_Bits: 4
   rb: {fileID: 1055670836468128994}
   cam: {fileID: 0}
+  Icon: {fileID: 0}
   moveSpeed: 5
   dashRange: 250
   invFrames: 0.5
@@ -688,6 +695,7 @@ MonoBehaviour:
   attackRange: 0.5
   damage: 10
   delay: 1
+  Icon: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 2048
