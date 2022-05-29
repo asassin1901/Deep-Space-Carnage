@@ -34,7 +34,7 @@ public class Boss : MonoBehaviour
     //x: 0
     //y: 1
     private float x = 0;
-    private float y = 1;
+    private float y = 2;
 
     private Animator myAnimator;
     // In case I need it later Depends on what anims I get
@@ -102,7 +102,7 @@ public class Boss : MonoBehaviour
 
     private IEnumerator DownTime()
     {
-        //We chose what gets into that switch down there. And there is literally no way this backfires in an annoying way.
+        //We randomly choose what gets into that switch down there.
         int pattern = (int)Mathf.Round(Random.Range(x,y));
         print("Random Chose Pattern:" + pattern);
         yield return new WaitForSeconds(betweenPatterns);
@@ -117,14 +117,17 @@ public class Boss : MonoBehaviour
                 StartCoroutine(LHL());
                 break;
             
+            case 2:
+                StartCoroutine(RRL());
+                break;
             default:
                 StartCoroutine(DownTime());
                 break;
         }
     }
-    //L: Left Hand
-    //R: Right Hand
-    //H: Head
+    //L: Left Hand = myAnimator.SetTrigger("LeftAttack")
+    //R: Right Hand = myAnimator.SetTrigger("RightAttack")
+    //H: Head = myAnimator.SetTrigger("Laser")
     public IEnumerator LRL()
     {
         myAnimator.SetTrigger("LeftAttack");
@@ -140,6 +143,16 @@ public class Boss : MonoBehaviour
         myAnimator.SetTrigger("LeftAttack");
         yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("Laser");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("LeftAttack");
+        StartCoroutine(DownTime());
+    }
+
+    public IEnumerator RRL()
+    {
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("RightAttack");
         yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("LeftAttack");
         StartCoroutine(DownTime());
