@@ -16,7 +16,7 @@ public class Shooting : MonoBehaviour
     public int maxMag;
     public int mag;
     public float reloadTime;
-    float reload = 0f;
+    private bool isReloading = false;
 
     public float delay;
 
@@ -53,6 +53,13 @@ public class Shooting : MonoBehaviour
     //Check every frame if the player didn't press the thing and if he did do stuff
     void Update()
     {
+        if(isReloading)
+            return;
+        if(mag<=0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
         processInputs();
     }
 
@@ -63,31 +70,24 @@ public class Shooting : MonoBehaviour
         {
             if (Time.time >= nextFireTime)
             {
-                Ammo();
+                Shoot();
                 nextFireTime = Time.time + delay;
-                bool test = reload == 0 || reload <= Time.time;
-                print (test);
             }
         }
     }
 
-    void Ammo()
+    IEnumerator Reload()
     {
-        if(mag > 0 && (reload == 0 || reload <= Time.time))
-        {
-            Shoot();
-            mag --;
-            print (mag);
-        } else
-        {
-            reload = Time.time + reloadTime;
-            mag = maxMag;
-        }
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+        mag = maxMag;
+        isReloading = false;
     }
 
     //Create a bullet and Yeet it with bulletForce amount of force
     void Shoot()
     {
+        mag --;
         if (shotgun)
         {
             //This makes bullet ammount of pellets spread out in 2 dimensions with a bit of a random spread defined within "spread"
