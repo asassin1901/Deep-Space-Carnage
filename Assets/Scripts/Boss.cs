@@ -32,9 +32,9 @@ public class Boss : MonoBehaviour
     //y: higher number of rng range EXCLUSIVE (We're rouding it to the closes int so basic definition doesn't apply)
     //Default values in case someone was "testing stuff" and forgott:
     //x: 0
-    //y: 1
+    //y: 2
     private float x = 0;
-    private float y = 1;
+    private float y = 2;
 
     private Animator myAnimator;
     // In case I need it later Depends on what anims I get
@@ -98,11 +98,13 @@ public class Boss : MonoBehaviour
             default:
             return;
         }
+        x = 2;
+        y = 5;
     }
 
     private IEnumerator DownTime()
     {
-        //We chose what gets into that switch down there. And there is literally no way this backfires in an annoying way.
+        //We randomly choose what gets into that switch down there.
         int pattern = (int)Mathf.Round(Random.Range(x,y));
         print("Random Chose Pattern:" + pattern);
         yield return new WaitForSeconds(betweenPatterns);
@@ -114,23 +116,31 @@ public class Boss : MonoBehaviour
                 break;
             
             case 1:
+                StartCoroutine(RRL());
+                break;
+            
+            case 2:
                 StartCoroutine(LHL());
                 break;
             
+            case 3:
+                StartCoroutine(RLLR());
+                break;
+
             default:
                 StartCoroutine(DownTime());
                 break;
         }
     }
-    //L: Left Hand
-    //R: Right Hand
-    //H: Head
+    //L: Left Hand = myAnimator.SetTrigger("LeftAttack")
+    //R: Right Hand = myAnimator.SetTrigger("RightAttack")
+    //H: Head = myAnimator.SetTrigger("Laser")
     public IEnumerator LRL()
     {
         myAnimator.SetTrigger("LeftAttack");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         myAnimator.SetTrigger("RightAttack");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         myAnimator.SetTrigger("LeftAttack");
         StartCoroutine(DownTime());
     }
@@ -142,6 +152,40 @@ public class Boss : MonoBehaviour
         myAnimator.SetTrigger("Laser");
         yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("LeftAttack");
+        StartCoroutine(DownTime());
+    }
+
+    public IEnumerator RRL()
+    {
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1.5f);
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1.5f);
+        myAnimator.SetTrigger("LeftAttack");
+        StartCoroutine(DownTime());
+    }
+
+    public IEnumerator RLLR()
+    {
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("RightAttack");
+        StartCoroutine(DownTime());
+    }
+
+    public IEnumerator HRLH()
+    {
+        myAnimator.SetTrigger("Laser");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("Laser");
         StartCoroutine(DownTime());
     }
 }
