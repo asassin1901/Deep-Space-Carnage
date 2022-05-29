@@ -126,9 +126,6 @@ public class Movement : MonoBehaviour
     {
         if (dash)
         {
-            // bool for turning on and off our dmg counting. Not sure if I'm using it to be honest. TD?
-            HP = false;
-
             myAnimator.SetTrigger("isDashing");
 
             //Where we're ending up
