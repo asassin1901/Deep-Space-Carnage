@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     public Camera cam;
     private GameObject player;
+    public RawImage Icon;
 
     //How fast we're moving
     public float moveSpeed;
@@ -94,6 +96,11 @@ public class Movement : MonoBehaviour
 
         //Where the mouse is
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        
+        if (delTime <= Time.time)
+        {
+            Icon.color = Color.white;
+        }
 
         //We dashin here
         if (Input.GetKeyDown(KeyCode.Space) && delTime <= Time.time)
@@ -126,6 +133,8 @@ public class Movement : MonoBehaviour
     {
         if (dash)
         {
+            Icon.color = new Color(1,1,1,0.5f);
+
             myAnimator.SetTrigger("isDashing");
 
             //Where we're ending up
@@ -149,9 +158,6 @@ public class Movement : MonoBehaviour
 
             //Enabling dash again since we can only dash when this changes to true
             dash = false;
-        } else
-        {
-            return;
         }
     }
 
@@ -164,10 +170,10 @@ public class Movement : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if(HP == true)
+        if(HP)
         {
             health -= damage;
-            print(health);
+            print("Current Health: " + health);
             StartCoroutine(iFrames());
             myAnimator.SetTrigger("Hit");
         }

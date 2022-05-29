@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
@@ -28,6 +29,11 @@ public class Shooting : MonoBehaviour
     private Vector2 pelletForce;
     private Animator myAnimator;
 
+    public Text ammoDisplay;
+    public string maxAmmo;
+    private string ammo;
+    private string wholeAmmo;
+
     private void Awake()
     {
         if (shotgun)
@@ -43,6 +49,10 @@ public class Shooting : MonoBehaviour
             }
         }
         mag = maxMag;
+        maxAmmo = maxMag.ToString();
+        ammo = maxAmmo;
+        wholeAmmo = ammo + " / " + maxAmmo;
+        ammoDisplay.text = wholeAmmo;
     }
 
     private void Start()
@@ -73,6 +83,8 @@ public class Shooting : MonoBehaviour
                 Shoot();
                 nextFireTime = Time.time + delay;
             }
+            wholeAmmo = ammo + " / " + maxAmmo;
+            ammoDisplay.text = wholeAmmo;
         }
     }
 
@@ -88,6 +100,7 @@ public class Shooting : MonoBehaviour
     void Shoot()
     {
         mag --;
+        ammo = mag.ToString();
         if (shotgun)
         {
             //This makes bullet ammount of pellets spread out in 2 dimensions with a bit of a random spread defined within "spread"
