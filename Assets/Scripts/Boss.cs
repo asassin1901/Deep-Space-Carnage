@@ -98,6 +98,8 @@ public class Boss : MonoBehaviour
             default:
             return;
         }
+        x = 2;
+        y = 5;
     }
 
     private IEnumerator DownTime()
@@ -114,12 +116,17 @@ public class Boss : MonoBehaviour
                 break;
             
             case 1:
-                StartCoroutine(LHL());
+                StartCoroutine(RRL());
                 break;
             
             case 2:
-                StartCoroutine(RRL());
+                StartCoroutine(LHL());
                 break;
+            
+            case 3:
+                StartCoroutine(RLLR());
+                break;
+
             default:
                 StartCoroutine(DownTime());
                 break;
@@ -131,9 +138,9 @@ public class Boss : MonoBehaviour
     public IEnumerator LRL()
     {
         myAnimator.SetTrigger("LeftAttack");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         myAnimator.SetTrigger("RightAttack");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         myAnimator.SetTrigger("LeftAttack");
         StartCoroutine(DownTime());
     }
@@ -151,10 +158,34 @@ public class Boss : MonoBehaviour
     public IEnumerator RRL()
     {
         myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1.5f);
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1.5f);
+        myAnimator.SetTrigger("LeftAttack");
+        StartCoroutine(DownTime());
+    }
+
+    public IEnumerator RLLR()
+    {
+        myAnimator.SetTrigger("RightAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("RightAttack");
+        StartCoroutine(DownTime());
+    }
+
+    public IEnumerator HRLH()
+    {
+        myAnimator.SetTrigger("Laser");
         yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("RightAttack");
         yield return new WaitForSeconds(1f);
         myAnimator.SetTrigger("LeftAttack");
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetTrigger("Laser");
         StartCoroutine(DownTime());
     }
 }
