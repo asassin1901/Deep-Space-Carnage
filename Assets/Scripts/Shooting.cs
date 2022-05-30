@@ -58,6 +58,11 @@ public class Shooting : MonoBehaviour
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
+        mag = maxMag;
+        maxAmmo = maxMag.ToString();
+        ammo = maxAmmo;
+        wholeAmmo = ammo + " / " + maxAmmo;
+        ammoDisplay.text = wholeAmmo;
     }
 
     //Check every frame if the player didn't press the thing and if he did do stuff
