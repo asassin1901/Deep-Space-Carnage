@@ -3223,19 +3223,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1055670835292141999, guid: 4dd6913479c85cf4a895d9aad484e1fd,
         type: 3}
-      propertyPath: maxMag
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1055670835292141999, guid: 4dd6913479c85cf4a895d9aad484e1fd,
-        type: 3}
       propertyPath: ammoDisplay
       value: 
       objectReference: {fileID: 474329539}
-    - target: {fileID: 1055670835292141999, guid: 4dd6913479c85cf4a895d9aad484e1fd,
-        type: 3}
-      propertyPath: reloadTime
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 1055670835413540935, guid: 4dd6913479c85cf4a895d9aad484e1fd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3248,19 +3238,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1055670835865288115, guid: 4dd6913479c85cf4a895d9aad484e1fd,
         type: 3}
-      propertyPath: maxMag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1055670835865288115, guid: 4dd6913479c85cf4a895d9aad484e1fd,
-        type: 3}
       propertyPath: ammoDisplay
       value: 
       objectReference: {fileID: 1096900319}
-    - target: {fileID: 1055670836376219710, guid: 4dd6913479c85cf4a895d9aad484e1fd,
-        type: 3}
-      propertyPath: maxMag
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1055670836376219710, guid: 4dd6913479c85cf4a895d9aad484e1fd,
         type: 3}
       propertyPath: ammoDisplay

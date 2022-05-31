@@ -18,9 +18,8 @@ public class Melee : MonoBehaviour
     public LayerMask enemyLayers;
     void Update()
     {
-        if(Time.time >= afterDelay && safe)
+        if(Time.time >= afterDelay)
         {
-            safe = true;
             Icon.color = Color.white;
         }
         if(Input.GetButton("Fire2") && Time.time >= afterDelay)
@@ -43,7 +42,6 @@ public class Melee : MonoBehaviour
         }
         
         afterDelay = Time.time + delay;
-        safe = true;
     }
 
     void OnDrawGizmosSelected()
