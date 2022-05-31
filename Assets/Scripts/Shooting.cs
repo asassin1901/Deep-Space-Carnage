@@ -17,7 +17,7 @@ public class Shooting : MonoBehaviour
     public int maxMag;
     public int mag;
     public float reloadTime;
-    private bool isReloading = false;
+    public bool isReloading = false;
 
     public float delay;
 
@@ -58,6 +58,12 @@ public class Shooting : MonoBehaviour
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
+        isReloading = false;
+    }
+
+    private void OnEnable()
+    {
+        isReloading = false;
     }
 
     //Check every frame if the player didn't press the thing and if he did do stuff

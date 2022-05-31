@@ -14,6 +14,9 @@ public class Movement : MonoBehaviour
     public Camera cam;
     private GameObject player;
     public RawImage Icon;
+    public Text healthPoints;
+    public Gradient gradient;
+    public Image fill;
 
     //How fast we're moving
     public float moveSpeed;
@@ -38,6 +41,9 @@ public class Movement : MonoBehaviour
     public bool HP = true;
     //how much health we have
     public float health;
+    private float maxHealth;
+
+    public Slider healthBar;
 
     private Vector2 moveDirection;
     private Vector2 mousePos;
@@ -53,6 +59,9 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         player = this.gameObject;
+        maxHealth = health;
+        healthPoints.text = "100%";
+        fill.color = gradient.Evaluate(health/maxHealth);
     }
 
     //Update goes every frame
@@ -176,6 +185,7 @@ public class Movement : MonoBehaviour
             print("Current Health: " + health);
             StartCoroutine(iFrames());
             myAnimator.SetTrigger("Hit");
+            HealthFill();
         }
     }
 
@@ -193,5 +203,12 @@ public class Movement : MonoBehaviour
             Debug.Log("Ded");
             Ded = false;
         }
+    }
+
+    void HealthFill()
+    {
+        healthBar.value = health/maxHealth;
+        healthPoints.text = (health/maxHealth * 100).ToString() + "%";
+        fill.color = gradient.Evaluate(health/maxHealth);
     }
 }
