@@ -2677,6 +2677,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1055670835292141994, guid: 4dd6913479c85cf4a895d9aad484e1fd,
+        type: 3}
+      propertyPath: m_Name
+      value: smg
+      objectReference: {fileID: 0}
     - target: {fileID: 1055670835292141999, guid: 4dd6913479c85cf4a895d9aad484e1fd,
         type: 3}
       propertyPath: ammoDisplay
@@ -2687,6 +2692,11 @@ PrefabInstance:
       propertyPath: ammoDisplay
       value: 
       objectReference: {fileID: 1096900319}
+    - target: {fileID: 1055670836376219705, guid: 4dd6913479c85cf4a895d9aad484e1fd,
+        type: 3}
+      propertyPath: m_Name
+      value: rail
+      objectReference: {fileID: 0}
     - target: {fileID: 1055670836376219710, guid: 4dd6913479c85cf4a895d9aad484e1fd,
         type: 3}
       propertyPath: ammoDisplay
