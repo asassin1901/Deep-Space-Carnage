@@ -18,7 +18,7 @@ public class Melee : MonoBehaviour
     public LayerMask enemyLayers;
 
     private void Awake() {
-        thisAnimator = GetComponent<Animator>();     
+        thisAnimator = this.transform.GetChild(1).transform.GetChild(0).GetComponent<Animator>();     
     }
     void Update()
     {
