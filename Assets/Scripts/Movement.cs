@@ -49,8 +49,10 @@ public class Movement : MonoBehaviour
     private Vector2 mousePos;
 
     public bool currentDoorKey = false;
+    private AudioManager audioManager;
 
     private void Awake() {
+        audioManager = FindObjectOfType<AudioManager>();
         cam = FindObjectOfType<Camera>();
         myAnimator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -142,6 +144,8 @@ public class Movement : MonoBehaviour
     {
         if (dash)
         {
+            audioManager.Play("dash");
+
             Icon.color = new Color(1,1,1,0.5f);
 
             myAnimator.SetTrigger("isDashing");
