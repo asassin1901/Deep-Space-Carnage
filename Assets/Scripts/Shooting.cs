@@ -33,9 +33,11 @@ public class Shooting : MonoBehaviour
     public string maxAmmo;
     private string ammo;
     private string wholeAmmo;
+    private AudioManager audioManager;
 
     private void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         if (shotgun)
         {
             //ConcurrentBag because I can't use lists in multiple threads even if I don't modify amount of elements within a list. Yes I did have to fix it. Yes I didn't know what a concurrent bag is before this.
@@ -105,7 +107,8 @@ public class Shooting : MonoBehaviour
     //Create a bullet and Yeet it with bulletForce amount of force
     void Shoot()
     {
-        FindObjectOfType<AudioManager>().Play("smg");
+        string clipName = this.gameObject.name;
+        audioManager.Play(clipName);
         mag --;
         ammo = mag.ToString();
         if (shotgun)

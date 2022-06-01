@@ -16,6 +16,10 @@ public class Melee : MonoBehaviour
     public RawImage Icon;
 
     public LayerMask enemyLayers;
+
+    private void Awake() {
+        thisAnimator = GetComponent<Animator>();     
+    }
     void Update()
     {
         if(Time.time >= afterDelay)
