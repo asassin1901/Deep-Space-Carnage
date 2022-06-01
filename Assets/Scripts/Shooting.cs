@@ -105,6 +105,7 @@ public class Shooting : MonoBehaviour
     //Create a bullet and Yeet it with bulletForce amount of force
     void Shoot()
     {
+        FindObjectOfType<AudioManager>().Play("smg");
         mag --;
         ammo = mag.ToString();
         if (shotgun)
