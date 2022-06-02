@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 13709166358438918}
-  attackRange: 3
+  attackRange: 1.5
   damage: 10
   hitEffect: {fileID: 3917031131652535313, guid: e2b5af504ba2d9149b33101e0336691b,
     type: 3}

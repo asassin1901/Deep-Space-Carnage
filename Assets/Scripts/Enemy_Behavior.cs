@@ -57,7 +57,7 @@ public class Enemy_Behavior : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
 
-
+        theShowBegins();
         // InvokeRepeating("UpdatePath", 0f, .5f);
     }
     public void theShowBegins()

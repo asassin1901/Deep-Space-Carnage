@@ -104,7 +104,7 @@ MonoBehaviour:
   spread: 0
   maxMag: 15
   mag: 0
-  reloadTime: 0.6
+  reloadTime: 1
   isReloading: 0
   delay: 0.3
   bulletForce: 20
@@ -325,7 +325,7 @@ MonoBehaviour:
   spread: 0
   maxMag: 1
   mag: 0
-  reloadTime: 3
+  reloadTime: 5
   isReloading: 0
   delay: 1.5
   bulletForce: 15
@@ -484,7 +484,7 @@ MonoBehaviour:
   spread: 15
   maxMag: 5
   mag: 0
-  reloadTime: 0.75
+  reloadTime: 2.5
   isReloading: 0
   delay: 1
   bulletForce: 200

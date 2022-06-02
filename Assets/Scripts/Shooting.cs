@@ -101,6 +101,8 @@ public class Shooting : MonoBehaviour
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         mag = maxMag;
+        wholeAmmo = maxAmmo + " / " + maxAmmo;
+        ammoDisplay.text = wholeAmmo;
         isReloading = false;
     }
 
