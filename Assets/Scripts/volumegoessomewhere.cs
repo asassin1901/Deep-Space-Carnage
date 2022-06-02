@@ -12,6 +12,7 @@ public class volumegoessomewhere : MonoBehaviour
 
     void Start ()
     {
+        audioMixer.SetFloat("volume", -12.7f);
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -23,6 +24,11 @@ public class volumegoessomewhere : MonoBehaviour
             options.Add(option);
         }
         resolutionDropdown.AddOptions(options); 
+    }
+
+    public void SetResolution(int resolutionIndex){
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     public void SetVolume (float volume)
