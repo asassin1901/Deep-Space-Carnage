@@ -669,7 +669,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   fill: {fileID: 0}
   moveSpeed: 5
-  dashRange: 30
+  dashRange: 200
   invFrames: 0.75
   moveX: 0
   moveY: 0
