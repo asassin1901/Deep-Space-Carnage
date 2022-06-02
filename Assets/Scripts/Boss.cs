@@ -39,6 +39,7 @@ public class Boss : MonoBehaviour
 
     private Animator myAnimator;
     public GameObject winScreen;
+    private int deathCount = 0;
 
     private void Awake() {
         myAnimator = this.GetComponent<Animator>();
@@ -76,7 +77,6 @@ public class Boss : MonoBehaviour
     }
     private void Death(int num){
         //0: LArm 1: RArm 2:Head
-        int deathCount = 0;
         switch (num)
         {
             case 0:
