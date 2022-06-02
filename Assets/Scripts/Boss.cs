@@ -26,6 +26,7 @@ public class Boss : MonoBehaviour
     private bool hand0 = false;
     private bool hand1 = false;
     public List<GameObject> children;
+    private int damagae = 2;
 
     //DO NOT TOUCH UNTILL YOU KNOW WHAT IT'S USED FOR
     //x: lower number of rng range INCLUSIVE
@@ -100,6 +101,11 @@ public class Boss : MonoBehaviour
         }
         x = 2;
         y = 5;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.CompareTag("Player"))
+            other.gameObject.GetComponent<Movement>().Damage(damagae);
     }
 
     private IEnumerator DownTime()
