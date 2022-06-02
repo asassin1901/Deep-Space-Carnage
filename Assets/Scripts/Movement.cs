@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
     public bool HP = true;
     //how much health we have
     public float health;
-    private float maxHealth;
+    public float maxHealth;
 
     public Slider healthBar;
 
@@ -203,13 +203,13 @@ public class Movement : MonoBehaviour
 
         if(Ded)
         {
-            Destroy(gameObject);
+            Destroy(player);
             Debug.Log("Ded");
             Ded = false;
         }
     }
 
-    void HealthFill()
+    public void HealthFill()
     {
         healthBar.value = health/maxHealth;
         healthPoints.text = (health/maxHealth * 100).ToString() + "%";

@@ -33,28 +33,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (Sniper)
-        {
-            if(collision.gameObject.layer == 3)
-            {
-                GameObject effect = Instantiate(hitEffect, transform.position, gameObject.transform.rotation);
-                Destroy(effect, effect_time);
-                Destroy(gameObject);
-            }
-
-            if (penCount <= penRate)
-            {
-                rb.AddForce(new Vector2(0f, penRate/penCount), ForceMode2D.Force);
-                penCount++;
-            }
-        }
-        else
-        {
             GameObject effect = Instantiate(hitEffect, transform.position, gameObject.transform.rotation);
             Destroy(effect, effect_time);
             Destroy(gameObject);
-        }
 
             switch (collision.gameObject.tag)
             {

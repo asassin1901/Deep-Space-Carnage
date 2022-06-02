@@ -40,6 +40,11 @@ public class Enemy_Behavior : MonoBehaviour
 
     //Methods
 
+    private void Awake()
+    {
+        myAnimator = GetComponentInChildren<Animator>();
+        myAnimator.enabled = false;    
+    }
     public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -48,10 +53,21 @@ public class Enemy_Behavior : MonoBehaviour
         //since Rb is private because leaving it on public might cause issues with readability we get our rigid body through code
         rb = this.GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
-        myAnimator = GetComponentInChildren<Animator>();
 
 
+        // InvokeRepeating("UpdatePath", 0f, .5f);
+    }
+    public void theShowBegins()
+    {
+        myAnimator.enabled = true;
+        StartCoroutine(Improvisation());
+    }
+
+    public IEnumerator Improvisation()
+    {
+        yield return new WaitForSeconds(2f);
         InvokeRepeating("UpdatePath", 0f, .5f);
+        print("The Hunt begins");
     }
 
     void UpdatePath()
