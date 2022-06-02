@@ -80,6 +80,8 @@ public class Enemy_Behavior : MonoBehaviour
 
     void UpdatePath()
     {
+        if(target == null)
+            return;
             if(seeker.IsDone())
                 seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
@@ -127,6 +129,8 @@ public class Enemy_Behavior : MonoBehaviour
         }
         void Rotate()
         {
+            if(target == null)
+                return;
             Vector2 lookDir = new Vector2(target.position.x, target.position.y) - rb.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
             rb.rotation = angle;
