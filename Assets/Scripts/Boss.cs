@@ -38,10 +38,7 @@ public class Boss : MonoBehaviour
     private float y = 2;
 
     private Animator myAnimator;
-    // In case I need it later Depends on what anims I get
-    // private Animator lHandAnim;
-    // private Animator rHandAnim;
-    // private Animator HeadAnim;
+    public GameObject winScreen;
 
     private void Awake() {
         myAnimator = this.GetComponent<Animator>();
@@ -79,28 +76,37 @@ public class Boss : MonoBehaviour
     }
     private void Death(int num){
         //0: LArm 1: RArm 2:Head
+        int deathCount = 0;
         switch (num)
         {
             case 0:
                 children[0].GetComponent<SpriteRenderer>().color = Color.gray;
                 children[0].GetComponent<BoxCollider2D>().enabled = false;
+                deathCount ++;
                 break;
             
             case 1:
                 children[1].GetComponent<SpriteRenderer>().color = Color.gray;
                 children[1].GetComponent<BoxCollider2D>().enabled = false;
+                deathCount ++;
                 break;
 
             case 2:
                 children[2].GetComponent<SpriteRenderer>().color = Color.gray;
                 children[2].GetComponent<BoxCollider2D>().enabled = false;
+                deathCount ++;
                 break;
             
             default:
             return;
         }
+
         x = 2;
         y = 5;
+        if (deathCount >= 3)
+        {
+            winScreen.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
