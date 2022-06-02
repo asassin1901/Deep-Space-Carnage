@@ -17,8 +17,11 @@ public class Melee : MonoBehaviour
 
     public LayerMask enemyLayers;
 
+    private AudioManager audioManager;
+
     private void Awake() {
         thisAnimator = this.transform.GetChild(1).transform.GetChild(1).GetComponent<Animator>();     
+        audioManager = FindObjectOfType<AudioManager>();
     }
     void Update()
     {
@@ -34,6 +37,7 @@ public class Melee : MonoBehaviour
 
     void Swing()
     {
+        audioManager.Play("Sword(?)");
         thisAnimator.SetTrigger("Strike");
 
         Icon.color = new Color(1,1,1,0.5f);

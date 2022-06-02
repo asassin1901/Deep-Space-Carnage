@@ -104,7 +104,7 @@ MonoBehaviour:
   spread: 0
   maxMag: 15
   mag: 0
-  reloadTime: 0.6
+  reloadTime: 1
   isReloading: 0
   delay: 0.3
   bulletForce: 20
@@ -325,7 +325,7 @@ MonoBehaviour:
   spread: 0
   maxMag: 1
   mag: 0
-  reloadTime: 3
+  reloadTime: 5
   isReloading: 0
   delay: 1.5
   bulletForce: 15
@@ -484,7 +484,7 @@ MonoBehaviour:
   spread: 15
   maxMag: 5
   mag: 0
-  reloadTime: 0.75
+  reloadTime: 2.5
   isReloading: 0
   delay: 1
   bulletForce: 200
@@ -669,7 +669,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   fill: {fileID: 0}
   moveSpeed: 5
-  dashRange: 30
+  dashRange: 200
   invFrames: 0.75
   moveX: 0
   moveY: 0

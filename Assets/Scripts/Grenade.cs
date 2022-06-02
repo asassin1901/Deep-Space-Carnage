@@ -7,7 +7,7 @@ public class Grenade : MonoBehaviour
     // Start is called before the first frame update
     public Transform attackPoint;
 
-    public float attackRange = 1.5f;
+    public float attackRange;
     public int damage;
     public GameObject hitEffect;
     public float effect_time = 2.5f;

@@ -51,6 +51,7 @@ public class Movement : MonoBehaviour
     public int currentDoorKey = 0;
     public bool[] doorKeys = new bool[3];
     private AudioManager audioManager;
+    public GameObject endGameScreen;
 
     private void Awake() {
         audioManager = FindObjectOfType<AudioManager>();
@@ -212,6 +213,8 @@ public class Movement : MonoBehaviour
         if(Ded)
         {
             Destroy(player);
+            Time.timeScale = 0f;
+            endGameScreen.SetActive(true);
             Debug.Log("Ded");
             Ded = false;
         }

@@ -40,7 +40,7 @@ public class BossAttack : MonoBehaviour
         for (int i = 0; i < projCount; i++)
         {
             thisProjectile = Instantiate(projectile, originPoint[0].position, Quaternion.identity);
-            thisProjectile.transform.Rotate(new Vector3(0 ,0 , (thisProjectile.transform.rotation.z + spread * i) + 180));
+            thisProjectile.transform.Rotate(new Vector3(0 ,0 , (thisProjectile.transform.rotation.z + spread * i) + 90));
         }
     }
 
