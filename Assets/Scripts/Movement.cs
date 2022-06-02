@@ -70,6 +70,7 @@ public class Movement : MonoBehaviour
         maxHealth = health;
         healthPoints.text = "100%";
         fill.color = gradient.Evaluate(health/maxHealth);
+        dash = true;
     }
 
     //Update goes every frame
