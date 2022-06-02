@@ -29,6 +29,6 @@ public class AlertManager : MonoBehaviour
             }
             GetComponent<BoxCollider2D>().enabled = false;
         }
-        audioManager.sounds[0].volume += 0.1f;
+        audioManager.sounds[0].volume += 0.0625f;
     }
 }

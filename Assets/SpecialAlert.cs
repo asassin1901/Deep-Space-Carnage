@@ -17,6 +17,10 @@ public class SpecialAlert : MonoBehaviour
 
     public int remainingEnemies;
     private bool safety = false;
+    private AudioManager audioManager;
+    private void Awake() {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         for (int i = 0; i < triggers.Length; i++)
         {
@@ -84,5 +88,6 @@ public class SpecialAlert : MonoBehaviour
         {
             blockades[i].SetActive(false);
         }
+        audioManager.sounds[0].volume += 0.1625f;
     }
 }
