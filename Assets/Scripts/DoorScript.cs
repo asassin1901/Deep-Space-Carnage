@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    public int keyID;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
-            if (other.gameObject.GetComponent<Movement>().currentDoorKey == true)
+            if (other.gameObject.GetComponent<Movement>().doorKeys[keyID] == true)
             {
-                other.gameObject.GetComponent<Movement>().currentDoorKey = false;
                 gameObject.SetActive(false);
             }
     }

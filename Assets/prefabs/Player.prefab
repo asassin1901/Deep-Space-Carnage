@@ -325,7 +325,7 @@ MonoBehaviour:
   spread: 0
   maxMag: 1
   mag: 0
-  reloadTime: 1.5
+  reloadTime: 3
   isReloading: 0
   delay: 1.5
   bulletForce: 15
@@ -669,7 +669,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   fill: {fileID: 0}
   moveSpeed: 5
-  dashRange: 250
+  dashRange: 30
   invFrames: 0.75
   moveX: 0
   moveY: 0
@@ -677,8 +677,10 @@ MonoBehaviour:
   dashDelay: 2.5
   HP: 1
   health: 5
+  maxHealth: 0
   healthBar: {fileID: 0}
   currentDoorKey: 0
+  doorKeys: 000000
 --- !u!114 &1055670836468128998
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,11 @@ public class KeysPrototype : MonoBehaviour
     2. If key is picked up allow for interaction with door.*/
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other.gameObject.GetComponent<Movement>().currentDoorKey = true;
-        gameObject.SetActive(false);
+        if(other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<Movement>().doorKeys[other.gameObject.GetComponent<Movement>().currentDoorKey] = true;
+            other.gameObject.GetComponent<Movement>().currentDoorKey ++;
+            gameObject.SetActive(false);
+        }
     }
 }

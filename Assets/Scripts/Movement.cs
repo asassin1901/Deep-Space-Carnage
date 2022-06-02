@@ -48,7 +48,8 @@ public class Movement : MonoBehaviour
     private Vector2 moveDirection;
     private Vector2 mousePos;
 
-    public bool currentDoorKey = false;
+    public int currentDoorKey = 0;
+    public bool[] doorKeys = new bool[3];
     private AudioManager audioManager;
 
     private void Awake() {
@@ -56,6 +57,10 @@ public class Movement : MonoBehaviour
         cam = FindObjectOfType<Camera>();
         myAnimator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        for (int i = 0; i < 3; i++)
+        {
+            doorKeys[i] = false;
+        }
     }
 
     private void Start()
@@ -153,12 +158,15 @@ public class Movement : MonoBehaviour
             //Where we're ending up
             Vector2 dashPosition = rb.position + moveDirection * dashRange *Time.deltaTime;
 
-            //Raycast to see if we're hiting any walls and a way to stop us from getting through walls
-            RaycastHit2D colDetection = Physics2D.Raycast(rb.position, moveDirection, dashRange, dashInclude);
-            if (colDetection.collider != null)
-            {
-                dashPosition = colDetection.point;
-            }
+            // OKAY. So. This somehow breaks the dash in a rather strange way. As in variable dashRange is completely different for vector 2 up there and that
+            // Raycast down here. And that really shouldn't be the case yet the thing broke so now we don't get to enjoy nice things.
+            // UPDATE: The dash seems to work just as fine/better with this commented.
+            // Raycast to see if we're hiting any walls and a way to stop us from getting through walls
+            // RaycastHit2D colDetection = Physics2D.Raycast(rb.position, moveDirection, dashRange, dashInclude);
+            // if (colDetection.collider != null)
+            // {
+            //     dashPosition = colDetection.point;
+            // }
 
             //We move our character
             rb.MovePosition(dashPosition);

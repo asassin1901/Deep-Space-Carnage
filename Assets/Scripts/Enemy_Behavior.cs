@@ -33,6 +33,8 @@ public class Enemy_Behavior : MonoBehaviour
     private bool health;
     //Our rigidbody
     private Rigidbody2D rb;
+    public bool canDamage;
+    private SpecialAlert headCount;
     //Why are we still here? Just to suffer? To apply knockback I need vector2. What do I need?
     /*1. Position of PC
     2. position of Enemy {Deprecated}
@@ -44,6 +46,7 @@ public class Enemy_Behavior : MonoBehaviour
     {
         myAnimator = GetComponentInChildren<Animator>();
         myAnimator.enabled = false;    
+        headCount = FindObjectOfType<SpecialAlert>();
     }
     public void Start()
     {
@@ -66,6 +69,7 @@ public class Enemy_Behavior : MonoBehaviour
     public IEnumerator Improvisation()
     {
         yield return new WaitForSeconds(2f);
+        canDamage = true;
         InvokeRepeating("UpdatePath", 0f, .5f);
         print("The Hunt begins");
     }
@@ -141,14 +145,15 @@ public class Enemy_Behavior : MonoBehaviour
     {
         if(HP <= 0)
         {
+            headCount.remainingEnemies--;
             Destroy(gameObject);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //we check if the player can take damage
-        if (collision.gameObject.CompareTag("Player"))
+        //we check if the player can take damage and if the enemy has hatched
+        if (collision.gameObject.CompareTag("Player") && canDamage)
         {
             myAnimator.SetTrigger("Chomp");
             collision.gameObject.GetComponent<Movement>().Damage(damage);

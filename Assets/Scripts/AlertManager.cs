@@ -15,11 +15,15 @@ public class AlertManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        foreach(GameObject enemy in relevantEnemies)
+        if (other.CompareTag("Player"))
         {
-            enemy.GetComponent<Enemy_Behavior>().enabled = true;
-            enemy.GetComponent<Enemy_Behavior>().theShowBegins();
+            foreach(GameObject enemy in relevantEnemies)
+            {
+                enemy.GetComponent<Enemy_Behavior>().enabled = true;
+                enemy.GetComponent<Enemy_Behavior>().theShowBegins();
+                print("Awake");
+            }
+            GetComponent<BoxCollider2D>().enabled = false;
         }
-        GetComponent<BoxCollider2D>().enabled = false;
     }
 }
