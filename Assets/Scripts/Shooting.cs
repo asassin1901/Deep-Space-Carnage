@@ -34,6 +34,7 @@ public class Shooting : MonoBehaviour
     private string ammo;
     private string wholeAmmo;
     private AudioManager audioManager;
+    private float reloadDelay;
 
     private void Awake()
     {
@@ -65,7 +66,13 @@ public class Shooting : MonoBehaviour
 
     private void OnEnable()
     {
-        isReloading = false;
+        if(reloadDelay <= Time.time)
+        {
+            mag = maxMag;
+            wholeAmmo = mag + " / " + maxAmmo;
+            ammoDisplay.text = wholeAmmo;
+            isReloading = false;
+        }
     }
 
     //Check every frame if the player didn't press the thing and if he did do stuff
@@ -75,7 +82,8 @@ public class Shooting : MonoBehaviour
             return;
         if(mag<=0)
         {
-            StartCoroutine(Reload());
+            reloadDelay = Time.time + reloadTime;
+            StartCoroutine(Reload(reloadTime));
             return;
         }
         processInputs();
@@ -96,12 +104,12 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    IEnumerator Reload()
+    IEnumerator Reload(float timeReload)
     {
         isReloading = true;
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(timeReload);
         mag = maxMag;
-        wholeAmmo = maxAmmo + " / " + maxAmmo;
+        wholeAmmo = mag + " / " + maxAmmo;
         ammoDisplay.text = wholeAmmo;
         isReloading = false;
     }

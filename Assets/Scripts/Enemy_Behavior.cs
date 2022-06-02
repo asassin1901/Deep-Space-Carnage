@@ -57,9 +57,13 @@ public class Enemy_Behavior : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
 
-        theShowBegins();
+        if(this.gameObject.GetComponent<Enemy_Behavior>().enabled)
+        {
+            theShowBegins();
+        }
         // InvokeRepeating("UpdatePath", 0f, .5f);
     }
+
     public void theShowBegins()
     {
         myAnimator.enabled = true;
