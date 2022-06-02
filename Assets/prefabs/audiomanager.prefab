@@ -43,50 +43,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4a4010f29b10643b699045a1c8177a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 24300002, guid: 89fcbe7d87ac52f45aa41737c3dfe927, type: 2}
   sounds:
   - name: Theme
     clip: {fileID: 8300000, guid: 325a6894628c4d346b8854e450d23984, type: 3}
-    volume: 0.02
+    volume: 0
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
     loop: 1
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: 89fcbe7d87ac52f45aa41737c3dfe927, type: 2}
     source: {fileID: 0}
   - name: smg
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 8842a1ffb0bdd2e4992d11ac285647e5, type: 3}
+    volume: 0.02
     volumeVariance: 0
-    pitch: 0
+    pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: 89fcbe7d87ac52f45aa41737c3dfe927, type: 2}
     source: {fileID: 0}
   - name: rail
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 67e399a0b9c0f7547ae2a8c8a7ada71c, type: 3}
+    volume: 0.02
     volumeVariance: 0
-    pitch: 0
+    pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: 89fcbe7d87ac52f45aa41737c3dfe927, type: 2}
     source: {fileID: 0}
   - name: grenade-launcher
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 45dfce6079aba1046919f1a7e5eb467e, type: 3}
+    volume: 0.02
     volumeVariance: 0
-    pitch: 0
+    pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: 89fcbe7d87ac52f45aa41737c3dfe927, type: 2}
     source: {fileID: 0}
   - name: Sword(?)
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 23315eb745aaef94bac3f9c0a0b382fb, type: 3}
+    volume: 0.5
     volumeVariance: 0
-    pitch: 0
+    pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: 89fcbe7d87ac52f45aa41737c3dfe927, type: 2}
+    source: {fileID: 0}
+  - name: dash
+    clip: {fileID: 8300000, guid: 3a617b127d58415449c3e4721188fef3, type: 3}
+    volume: 0.5
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 24300002, guid: 89fcbe7d87ac52f45aa41737c3dfe927, type: 2}
     source: {fileID: 0}
