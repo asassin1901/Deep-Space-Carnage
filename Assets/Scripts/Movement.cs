@@ -213,7 +213,6 @@ public class Movement : MonoBehaviour
         if(Ded)
         {
             Destroy(player);
-            Time.timeScale = 0f;
             endGameScreen.SetActive(true);
             Debug.Log("Ded");
             Ded = false;

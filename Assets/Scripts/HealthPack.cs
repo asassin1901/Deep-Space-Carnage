@@ -9,6 +9,6 @@ public class HealthPack : MonoBehaviour
        healthReturn = other.gameObject.GetComponent<Movement>().maxHealth;
        other.gameObject.GetComponent<Movement>().health = healthReturn;
        other.gameObject.GetComponent<Movement>().HealthFill();
-       Destroy(this);
+       Destroy(this.gameObject);
    }
 }
