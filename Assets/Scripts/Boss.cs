@@ -109,11 +109,6 @@ public class Boss : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player"))
-            other.gameObject.GetComponent<Movement>().Damage(damagae);
-    }
-
     private IEnumerator DownTime()
     {
         //We randomly choose what gets into that switch down there.
