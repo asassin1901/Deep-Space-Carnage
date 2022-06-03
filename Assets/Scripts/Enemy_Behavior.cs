@@ -35,6 +35,8 @@ public class Enemy_Behavior : MonoBehaviour
     private Rigidbody2D rb;
     public bool canDamage;
     private SpecialAlert headCount;
+    public bool Chomper;
+    private float delay = 2f;
     //Why are we still here? Just to suffer? To apply knockback I need vector2. What do I need?
     /*1. Position of PC
     2. position of Enemy {Deprecated}
@@ -66,13 +68,16 @@ public class Enemy_Behavior : MonoBehaviour
 
     public void theShowBegins()
     {
+        if(Chomper){
+            delay = 0.01f;
+        }
         myAnimator.enabled = true;
         StartCoroutine(Improvisation());
     }
 
     public IEnumerator Improvisation()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(delay);
         canDamage = true;
         InvokeRepeating("UpdatePath", 0f, .5f);
         print("The Hunt begins");
