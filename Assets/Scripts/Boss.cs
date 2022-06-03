@@ -35,7 +35,7 @@ public class Boss : MonoBehaviour
     //x: 0
     //y: 2
     private float x = 0;
-    private float y = 2;
+    private float y = 5;
 
     private Animator myAnimator;
     public GameObject winScreen;
