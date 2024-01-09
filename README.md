@@ -1,5 +1,6 @@
 # DeepSpaceFuckup
-This is my Bachelors degree project.
+This project was created by me and Adam Ostojski as a Bachelor degree project.
 
-It's a topdown horde shooter. I'm trying my best to try and make something out of nothing but
-Saddly no one is paying me and I have no budget also we're short on time so the quality can't be perfect.
+# Disclaimer
+Due to limited timeframe caused by internal strife in the previous development team we weren't able to develop,
+the kind of experience we had hoped for.
